@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-from script.score import  PlayerScore
+from score import  PlayerScore
 import datetime
 import time
 
