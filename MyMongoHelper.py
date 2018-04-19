@@ -46,7 +46,7 @@ class PlayerScore:
     def rankIndex(name, value):
         print("查询 %s的排名  %d" % (name,value))
         coll=GetColl()
-        result=coll.find({name:{'$gte':value}})
+        result=coll.find({name:{'$gte':value}}).count()
         return result
 
     #取得排行榜前几名玩家的数据
@@ -57,5 +57,6 @@ class PlayerScore:
     def getTopGroup(name, type,count):
         print("查询 %s的前%d 名"  % (name, count))
         coll = GetColl()
-        result = coll.find().sort({name:type}.limit(count))
+        # result = coll.find().sort({name:type}).limit(count)
+        result = coll.find().sort([(name,type)]).limit(count)
         return result
