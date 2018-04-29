@@ -1,9 +1,8 @@
 from flask import Flask, jsonify, request, Response, make_response
 from MyMongoHelper import PlayerScore
-import datetime
 import time
-import random
 import json
+import datetime
 
 app = Flask(__name__)
 
@@ -17,8 +16,10 @@ def hello():
 
 @app.route("/time")
 def theTime():
-	at = time.strftime(" {year:%Y,month:%m,day:%d,hour:%H,minute:%M,second:%S}")
-	return str(at)
+	# at = time.strftime(' {"year":%Y,"month":%m,"day":%d,"hour":%H,"minute":%M,"second":%S}')
+	at = time.localtime()
+	nt= datetime.datetime.now()
+	return  str( nt.month)
 
 
 '''
@@ -138,12 +139,8 @@ def index():
 	return str(data)
 
 
-def getYesterday():
-	today = datetime.now()
-	oneday = datetime.timedelta(days = 2)
-	# yesterday=today-oneday
-	return today
+
 
 
 if __name__ == "__main__":
-	app.run( host = '0.0.0.0')
+	app.run(debug=True)
